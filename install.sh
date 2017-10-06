@@ -13,7 +13,7 @@ echo "Step 2: Appended 'to' command in $bashFile"
 echo "
 # Added by to (https://github.com/nmoya/to.git)
 to() {
-  out=\`/home/nmoya/Repos/to/to.py \$@\`
+  out=\`$cwd/to.py \$@\`
   if [[ \$out == c* ]]
   then
     eval \$out
