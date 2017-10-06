@@ -30,7 +30,8 @@ Note that these are the minimum letters that you need to type in order to achiev
 "\e[A": history-search-backward
 "\e[B": history-search-forward
 set show-all-if-ambiguous on
-set completion-ignore-case on```
+set completion-ignore-case on
+```
 
 You need to restart your terminal after adding these lines in `.inputrc`.
 
