@@ -5,7 +5,7 @@ chmod +x to.py
 unameOut="$(uname -s)"
 case "${unameOut}" in
   Linux*)     bashFile=~/.bashrc;;
-  Darwin*)    bashFile=~/bash_profile;;
+  Darwin*)    bashFile=~/.bash_profile;;
   *)          bashFile=~/.bashrc
 esac
 
