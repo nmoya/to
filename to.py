@@ -4,6 +4,7 @@
 import sys
 import subprocess
 import re
+import os
 
 BASE_URL = "~/"
 
@@ -19,7 +20,7 @@ def build_url(segment):
 
 def ls(path):
     command = "find " + path + " -maxdepth 1 -type d"
-    folders = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=True).split('\n')
+    folders = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=True).decode('utf-8').split("\n")
     return filter(lambda f: len(f) != 0, map(lambda f: f.split("/")[-1], folders))
 
 def startsWith(prefix, value):
@@ -31,11 +32,11 @@ def build_cd(args):
     for letter in args:
         prefix += letter
         all_paths = ls(cd_cmd)
-        available_paths = filter(lambda p: startsWith(prefix, p), all_paths)
+        available_paths = list(filter(lambda p: startsWith(prefix, p), all_paths))
         if len(available_paths) == 0:
             return cd_cmd
         elif len(available_paths) == 1:
-            cd_cmd += available_paths[0] + "/"
+            cd_cmd = os.path.join(cd_cmd, available_paths[0])
             prefix = ''
     if len(prefix) != 0:
         print (available_paths)
