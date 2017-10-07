@@ -22,8 +22,13 @@ to() {
   fi
 }" >> $bashFile
 
-echo "Step 3: Re-loading $bashFile"
-source $bashFile
+if [[ $unameOut == Darwin* ]]
+then
+  echo "Step 3: Re-start your terminal to start using to"
+else
+  echo "Step 3: Re-loading $bashFile"
+  source $bashFile
+fi
 
 echo "
 
