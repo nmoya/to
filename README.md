@@ -39,7 +39,7 @@ After that, when you start typing a bash command: Ex. `git pull ori` and press *
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for usage and development purposes.
+These instructions will get you a copy of the project up and running on your local machine for usage and development purposes. Keep in mind that this is still very new, so expect some bugs. Please open issue when you find one and feel free to contribute!
 
 ### Prerequisites
 
