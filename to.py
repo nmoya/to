@@ -18,8 +18,11 @@ def check_args():
 def build_url(segment):
     return BASE_URL + segment
 
+def shquote(s):
+    return s.replace("'", "'\\''")
+
 def ls(path):
-    command = "find " + path + " -maxdepth 1 -type d"
+    command = "find %s -maxdepth 1 -type d" % (shquote(path))
     folders = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=True).decode('utf-8').split("\n")
     return filter(lambda f: len(f) != 0, map(lambda f: f.split("/")[-1], folders))
 
