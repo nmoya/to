@@ -5,6 +5,7 @@ import sys
 import subprocess
 import re
 import os
+from colorama import Fore, Style
 
 BASE_URL = "~/"
 
@@ -29,20 +30,25 @@ def ls(path):
 def startsWith(prefix, value):
     return bool(re.match(prefix, value, re.I))
 
+def cprint(color, text):
+    sys.stderr.write(color + text + Style.RESET_ALL)
+
 def build_cd(args):
     cd_cmd = BASE_URL
     prefix = ''
-    for letter in args:
+    for i, letter in enumerate(args):
         prefix += letter
         all_paths = ls(cd_cmd)
         available_paths = list(filter(lambda p: startsWith(prefix, p), all_paths))
         if len(available_paths) == 0:
+            if i < len(args):
+                cprint(Fore.YELLOW, "[WARNING]: arg %s not used\nMoved to: %s\n" % (args[i:], cd_cmd))
             return cd_cmd
         elif len(available_paths) == 1:
             cd_cmd = os.path.join(cd_cmd, available_paths[0])
             prefix = ''
     if len(prefix) != 0:
-        print (map(str, available_paths))
+        cprint(Fore.RED, str(map(str, available_paths)))
         sys.exit(-1)
     return cd_cmd
 
