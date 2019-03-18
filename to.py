@@ -42,7 +42,7 @@ def build_cd(args):
             cd_cmd = os.path.join(cd_cmd, available_paths[0])
             prefix = ''
     if len(prefix) != 0:
-        print (available_paths)
+        print (map(str, available_paths))
         sys.exit(-1)
     return cd_cmd
 
