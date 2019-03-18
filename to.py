@@ -36,17 +36,20 @@ def cprint(color, text):
 def build_cd(args):
     cd_cmd = BASE_URL
     prefix = ''
+    last_used_index = 0
     for i, letter in enumerate(args):
         prefix += letter
         all_paths = ls(cd_cmd)
         available_paths = list(filter(lambda p: startsWith(prefix, p), all_paths))
         if len(available_paths) == 0:
             if i < len(args):
-                cprint(Fore.YELLOW, "[WARNING]: arg %s not used\nMoved to: %s\n" % (args[i:], cd_cmd))
+                cprint(Fore.YELLOW, "[WARNING]: arg %s not used\nMoved to: %s\n" % (
+                    args[last_used_index:], cd_cmd))
             return cd_cmd
         elif len(available_paths) == 1:
             cd_cmd = os.path.join(cd_cmd, available_paths[0])
             prefix = ''
+            last_used_index = i+1
     if len(prefix) != 0:
         cprint(Fore.RED, str(map(str, available_paths)))
         sys.exit(-1)
